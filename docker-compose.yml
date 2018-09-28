@@ -1,0 +1,35 @@
+version: "2"
+
+volumes:
+  db:
+    driver: local
+
+services:
+  wiremock:
+    image: rodolpheche/wiremock
+    ports:
+      - 8080:8080
+    volumes:
+      - ./data/wiremock:/home/wiremock
+
+  postgres:
+    image: postgres:9.6.6-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: "cabinscape"
+      POSTGRES_PASSWORD: "cabinscape"
+      POSTGRES_DB: "cabinscape"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - db:/var/lib/postgresql/data/pgdata
+
+  rabbit:
+    image: rabbitmq:3.6-management
+    ports:
+      - 15672:15672
+      - 5672:5672
+    environment:
+      RABBITMQ_DEFAULT_USER: "cabinscape"
+      RABBITMQ_DEFAULT_PASS: "cabinscape"
+      RABBITMQ_DEFAULT_VHOST: "/"
