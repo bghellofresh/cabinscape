@@ -1,13 +1,13 @@
 {
-    "request": {
-      "method": "GET",
-      "url": "/airbnb"
+  "request": {
+    "method": "GET",
+    "url": "/airbnb"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/plain"
     },
-    "response": {
-      "status": 200,
-      "headers": {
-        "Content-Type": "text/plain"
-      },
-      "bodyFileName": "airbnb"
-    }
+    "bodyFileName": "airbnb"
   }
+}

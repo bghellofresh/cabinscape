@@ -1,0 +1,37 @@
+#%RAML 1.0
+title: Cabinscape AirBnb Bookings Sync Service
+version: 1
+baseUri: http://api.cs.com/
+documentation:
+  - title: API
+    content: |
+      The API provides an endpoint that AirBnb can use to import bookings from the main Cabinspace site.
+  - title: Consumer
+    content: |
+      A consumer watches for bookings on the main Cabinspace site and adds them to the body of the ics produced by the API.
+
+/calendar/ical.ics:
+  description: This endpoint produces text in ics format for consumption by AirBnb
+
+  get: # HTTP method declaration
+    responses: # declare a response
+      200: # HTTP status code
+        body: # declare content of response
+          text/plain: # media type
+            type: | # structural definition of a response (schema or type)
+              {
+                "title": "ical.ics response",
+                "type": "text"
+              }
+            example: |
+              BEGIN:VCALENDAR
+              PRODID;X-RICAL-TZSOURCE=TZINFO:-//Airbnb Inc//Hosting Calendar 0.8.8//EN
+              CALSCALE:GREGORIAN
+              VERSION:2.0
+              BEGIN:VEVENT
+              DTEND;VALUE=DATE:20190117
+              DTSTART;VALUE=DATE:20170116
+              UID:f7xyme6s3fww--dfhqc1b0cf0t@airbnb.com
+              SUMMARY:Not available
+              END:VEVENT
+              END:VCALENDAR

@@ -1,24 +1,15 @@
-# CS AirBnb Calendar Sync Service
+# AirBnB Calendar Sync Service
 
-## Problem
-- potential customers can book on AirBnB despite the cabin being unavailable
-- the syncing process is manual and takes too much time
+You can read the specification here: [Specification](spec.md)
 
-## Solution
-- leverage AirBnB calendar syncing to publish bookings on cabinscape main site to ical consumed by airbnb
+### Usage
+After running `docker-compose up -d` the following resources are available
+- Postgres [http://localhost:5432](http://localhost:5432)
 
-## Proof of Concept
-- https://misell.cymru/posts/airbnb-calendar-golang/
+To build the binary run `make`. The API will be accessible via [http://localhost:9090](http://localhost:9090)
 
-## Technical Requirements
-- API to provide an ics file to airbnb for import
-    - retrieves bookings from DB
-    - returns them in ical format
-- Booking Consumer to consume booking events from main site
-    - consumes event
-    - writes to DB filling fields necessary to create ical
-- Adapt main site to publish an event to RabbitMQ when booking succeeds
-    - event payload must contain necessary information for creating calendar entry
+### API Endpoints
 
-## Infrastructure Requirements
-- Digital Ocean Droplet access
+- `/calendar/ical.ics` should be consumed by AirBnB
+
+An endpoint could also be provided to store existing events in the AirBnB export calendar.
